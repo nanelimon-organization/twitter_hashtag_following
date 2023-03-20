@@ -3,7 +3,7 @@ import json
 from decouple import config
 
 
-hashtag = [config('HASTAG')]
+hashtag = [config('HASHTAG')]
 
 max_result = 1
 
@@ -18,9 +18,14 @@ def get_live_tweet():
         if index < max_result:
             json_tweet = json.loads(i.json())
             result = {
+                'device': json_tweet['sourceLabel'],
+                'tweet_url': json_tweet['url'],
+                'user_url': json_tweet['user']['url'],
+                'user_location': json_tweet['user']['location'],
                 'username': json_tweet['username'],
                 'content': json_tweet['content'],
-                'date': json_tweet['date']
+                'date': json_tweet['date'],
+                'hashtags': json_tweet['hashtags']
             }
             return result
         else:
