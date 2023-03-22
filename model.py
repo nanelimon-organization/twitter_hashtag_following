@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from db import DB
 
 
@@ -26,15 +24,27 @@ class Tweets:
             ''')
 
     @staticmethod
-    def save(device, tweet_url, user_url, user_location, username, content, publish_date,
-                 hashtags= None):
-        with DB().conn as conn, conn.cursor() as cursor:
-            cursor.execute('''INSERT INTO tweets 
-            (device, tweet_url, user_url, user_location, username, content, publish_date, hashtags)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s);''',
-                           (device, tweet_url, user_url, user_location, username,
-                            content, publish_date, hashtags))
+    def save(tweet: dict):
+        device = tweet['device']
+        tweet_url = tweet['tweet_url']
+        user_url = tweet['user_url']
+        user_location = tweet['user_location']
+        username = tweet['username']
+        content = tweet['content']
+        publish_date = tweet['publish_date']
+        hashtags = tweet['hashtags']
 
+        with DB().conn as conn, conn.cursor() as cursor:
+            cursor.execute('''SELECT tweet_url FROM tweets WHERE tweet_url=%s;''', (tweet_url,))
+            result = cursor.fetchone()
+            if result is None:
+                cursor.execute('''INSERT INTO tweets 
+                (device, tweet_url, user_url, user_location, username, content, publish_date, hashtags)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s);''',
+                               (device, tweet_url, user_url, user_location, username,
+                                content, publish_date, hashtags))
+            else:
+                print(f"Tweet already exists in the database: {tweet_url}")
 
     @staticmethod
     def get_item(id):
