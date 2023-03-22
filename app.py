@@ -2,6 +2,7 @@ from snscrape.modules import twitter
 import json
 from decouple import config
 from model import Tweets
+from msticpy.data.data_obfus import hash_string, hash_account, hash_item
 
 
 hashtags = [config('HASHTAG')]
@@ -21,14 +22,17 @@ def get_live_tweet():
                 json_tweet = json.loads(i.json())
                 result = {
                     'device': json_tweet['sourceLabel'],
-                    'tweet_url': json_tweet['url'],
-                    'user_url': json_tweet['user']['url'],
+                    'tweet_url': hash_string(json_tweet['url']),
+                    #'user_url': json_tweet['user']['url'],
                     'user_location': json_tweet['user']['location'],
-                    'username': json_tweet['username'],
+                    'username': hash_account(json_tweet['username']),
                     'content': json_tweet['content'],
                     'publish_date': json_tweet['date'],
                     'hashtags': json_tweet['hashtags']
                 }
+                print(hash_string(result['tweet_url']))
+                print(hash_account(result['username']))
+
                 return result
             else:
                 break

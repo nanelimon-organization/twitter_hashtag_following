@@ -27,7 +27,7 @@ class Tweets:
     def save(tweet: dict):
         device = tweet['device']
         tweet_url = tweet['tweet_url']
-        user_url = tweet['user_url']
+        #user_url = tweet['user_url']
         user_location = tweet['user_location']
         username = tweet['username']
         content = tweet['content']
@@ -39,9 +39,9 @@ class Tweets:
             result = cursor.fetchone()
             if result is None:
                 cursor.execute('''INSERT INTO tweets 
-                (device, tweet_url, user_url, user_location, username, content, publish_date, hashtags)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s);''',
-                               (device, tweet_url, user_url, user_location, username,
+                (device, tweet_url, user_location, username, content, publish_date, hashtags)
+                VALUES (%s, %s, %s, %s, %s, %s, %s);''',
+                               (device, tweet_url, user_location, username,
                                 content, publish_date, hashtags))
             else:
                 print(f"Tweet already exists in the database: {tweet_url}")
