@@ -4,24 +4,9 @@ from db import DB
 
 
 class Tweets:
-    def __init__(self, id, device, tweet_url, user_url, user_location, username, content, publish_date,
-                 created_date=None, hashtags= None):
-        self.id = id
-        self.device = device
-        self.tweet_url = tweet_url
-        self.user_url = user_url
-        self.user_location = user_location
-        self.username = username
-        self.content = content
-        self.publish_date = datetime.strptime(publish_date, '%d-%m-%Y:%H:%M:%S')
-        if created_date is None:
-            self.created_date = datetime.now().strftime('%d-%m-%Y:%H:%M:%S')
-        else:
-            self.created_date = created_date.strftime('%d-%m-%Y:%H:%M:%S')
-        self.hashtags = hashtags
 
-    @classmethod
-    def create_table(cls):
+    @staticmethod
+    def create_table():
         with DB().conn as conn, conn.cursor() as cursor:
             cursor.execute('''CREATE TABLE tweets (
             id SERIAL PRIMARY KEY,
@@ -31,7 +16,7 @@ class Tweets:
             user_location VARCHAR(255),
             username VARCHAR(255) NOT NULL,
             content TEXT NOT NULL,
-            publish_date TIMESTAMP,
+            publish_date VARCHAR(255),
             created_date TIMESTAMP DEFAULT NOW(),
             hashtags VARCHAR(255) NOT NULL 
             );
@@ -40,20 +25,33 @@ class Tweets:
             CREATE INDEX idx_username ON tweets (username);
             ''')
 
-    def save(self):
+    @staticmethod
+    def save(device, tweet_url, user_url, user_location, username, content, publish_date,
+                 hashtags= None):
         with DB().conn as conn, conn.cursor() as cursor:
             cursor.execute('''INSERT INTO tweets 
-            (device, tweet_url, user_url, user_location, username, content, publish_date, created_date, hashtags)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);''',
-                           (self.device, self.tweet_url, self.user_url, self.user_location, self.username,
-                            self.content, self.publish_date, self.created_date, self.hashtags))
+            (device, tweet_url, user_url, user_location, username, content, publish_date, hashtags)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s);''',
+                           (device, tweet_url, user_url, user_location, username,
+                            content, publish_date, hashtags))
 
-    @classmethod
-    def get_item(cls, id):
+
+    @staticmethod
+    def get_item(id):
         with DB().conn as conn, conn.cursor() as cursor:
             cursor.execute("SELECT * FROM tweets WHERE id = %s", (id,))
             result = cursor.fetchone()
             if result:
-                return cls(*result)
+                return result
+            else:
+                return None
+
+    @staticmethod
+    def get_all_items():
+        with DB().conn as conn, conn.cursor() as cursor:
+            cursor.execute("SELECT * FROM tweets")
+            result = cursor.fetchall()
+            if result:
+                return result
             else:
                 return None
