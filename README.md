@@ -8,7 +8,8 @@ The HASHTAG variable in the code specifies the hashtag that the user wants to be
 
 The code runs in a loop, and at each round, it collects the live tweets from the specified hashtag and saves the data via a Python class called model. This process continues while the loop runs indefinitely.
 
-Also, the code uses the hash_string() and hash_account() functions in the msticpy.data.data_obfus module to anonymize tweet data. These functions are used as a privacy measure against users watching tweets.
+Also, the code uses the hash_string() and hash_account() functions in the msticpy.data.data_obfus module to anonymize tweet data. These functions are used as a privacy measure against users watching tweets [KVKK](https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf).
+translation license: Apache License 2.0
 
 ## Technologies
 
