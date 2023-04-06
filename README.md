@@ -1,7 +1,4 @@
-# Twitter Hashtag Following Cron Job
-
-```bash
-```
+# Twitter Hashtag Following Stream Job
 
 
 Bu Modül, bir veritabanı ile iletişim kuran ve Twitter'dan tweet'leri toplayan, kaydeden ve sorgulayan bir Tweets sınıfı içerir. 
@@ -18,11 +15,14 @@ Aws rds postgresql veritabanı ile iletişim kuran ve Twitter'dan tweet'leri top
 Tweets sınıfı, veritabanındaki 'tweets' adlı tabloyla çalışmak için statik yöntemler içerir. Bu yöntemler, tabloyu oluşturmak, verileri kaydetmek ve tablodaki öğeleri almak için kullanılır.
 
 
+<img src="https://github.com/Teknofest-Nane-Limon/twitter_hashtag_following/blob/main/asserts/Screenshot_2023-03-26_at_18.36.48.png" alt="alt text" width="400" height="300" ALIGN=RIGHT>
+
 - id: Birincil anahtar ve seri olarak artan tweet kimliği.
 - device: Tweet'in gönderildiği cihazın adı.
 - tweet_url: Tweet'in URL'si (benzersiz ve boş olamaz).
 - user_url: Tweet'i gönderen kullanıcının profili.
 - user_location: Kullanıcının coğrafi konumu.
+
 - username: Tweet'i gönderen kullanıcının adı (boş olamaz).
 - content: Tweet'in içeriği (boş olamaz).
 - publish_date: Tweet'in yayınlanma tarihi.
@@ -31,63 +31,54 @@ Tweets sınıfı, veritabanındaki 'tweets' adlı tabloyla çalışmak için sta
 .
 
 Ayrıca, model msticpy.data.data_obfus modülündeki hash_string() ve hash_account() fonksiyonlarını tweet verilerini anonimleştirmek için kullanır. 
-Bu fonksiyonlar, KVKK gereği bir gizlilik önlemi olarak kullanılır.
+Bu fonksiyonlar, KVKK - [Kvkk 28.1 c]( https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf&ved=2ahUKEwjmnN6em5X-AhW2_7sIHa2-AXoQFnoECAsQAQ&usg=AOvVaw1Ypd0NDuD2xa79c6aOkabq) gereği bir gizlilik önlemi olarak kullanılır.
 
 
-## Technologies
 
-The main technologies are:
+## Teknolojiler
+
+Kullanılan teknolojiler:
 
 - [PostgreSQL](https://www.postgresql.org/) - RDBMS database
-- [Python](https://docs.python.org/3.10/) - Python version: 3.10 
+- [Python](https://docs.python.org/3.10/) - Python versiyon: 3.10 
 
 ## Prerequisites
 
-### Environment
+--- 
 
-Please set up your Python version to `3.10`
+
+## Gereksinimler
+
+### Ortam
+
+Lütfen Python sürümünüzü `3.10` olarak ayarlayın:
 
 ```bash
 python --version
 ```
-- Install Virtualenviroment
+
+- Virtualenv kurulumu:
 ```bash
 pip install virtualenv
 ```
-- Create the virtualenv
+- Virtualenv oluşturma:
 ```bash
 virtualenv venv
 ```
-- Activate the venv
+- Virtualenv'i aktif hale getirme:
 ```bash
 source venv/bin/activate
 ```
-- Install libraries
+- Kütüphanelerin kurulumu:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Configuration
+## İşi Çalıştırma
 
-Create your `.env` file.
-```bash
-cd <project-directory>
-
-touch .env
-```
-- Add environment variables into `.env` file
-```bash
-* HASHTAG=#hashtag
-* DATABASE=postgresql
-* HOST=localhost
-* USERNAME=postgres
-* PASSWORD=postgres
-* PORT=5432
+```python
+python main.py
 ```
 
-## Run Job
-
-```bash
-python app.py
-```
+--- 
 
