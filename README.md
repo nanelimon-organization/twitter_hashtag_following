@@ -1,17 +1,61 @@
 # Twitter Hashtag Following Cron Job
 
 ```bash
-translation license: Apache License 2.0
 ```
-This code is used to collect live tweets from the specified Twitter hashtag and saves the data in a specified model.
 
-The code includes four Python modules named snscrape, json, decouple, and model. These modules are used to communicate with the Twitter API and process tweet data.
 
-The HASHTAG variable in the code specifies the hashtag that the user wants to be in the tweets they want to collect.
+Twitter Hashtag Takip Cron Job
 
-The code runs in a loop, and at each round, it collects the live tweets from the specified hashtag and saves the data via a Python class called model. This process continues while the loop runs indefinitely.
+Bu Modül, bir veritabanı ile iletişim kuran ve Twitter'dan tweet'leri toplayan, kaydeden ve sorgulayan bir Tweets sınıfı içerir. 
 
-Also, the code uses the hash_string() and hash_account() functions in the msticpy.data.data_obfus module to anonymize tweet data. These functions are used as a privacy measure against users watching tweets [KVKK](https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6698.pdf).
+Modül, belirtilen Twitter hashtag'inden canlı tweet'leri toplamak ve verileri belirtilen bir modelde kaydetmek için kullanılır.
+
+Modül snscrape, json, decouple ve model adlı dört Python modülü içerir. Bu modüller, Twitter API ile iletişim kurmak ve tweet verilerini işlemek için kullanılır.
+
+Modülde bulunan HASHTAG değişkeni, kullanıcının toplamak istediği tweet'lerde bulunmasını istediği hashtag'i belirtir.
+
+Model döngü içinde çalışır ve her turda belirtilen hashtag'den canlı tweet'leri toplar ve model adlı bir Python sınıfı aracılığıyla verileri kaydeder. Bu işlem, döngü sürekli olarak çalışırken devam eder.
+
+
+Bu projede, Twitter API'sinden belirli bir hashtag'e göre tweet'leri toplamak, veritabanında saklamak ve sorgulamak için bir Python uygulaması geliştirilmiştir.
+
+
+Bu Python kodu, bir veritabanı ile iletişim kuran ve Twitter'dan tweet'leri toplayan, kaydeden ve sorgulayan bir Tweets sınıfı içerir. İşleyiş ve çalışma mantığı hakkında şu şekilde özetlenebilir:
+
+Tweets sınıfı, veritabanındaki 'tweets' adlı tabloyla çalışmak için statik yöntemler içerir. Bu yöntemler, tabloyu oluşturmak, verileri kaydetmek ve tablodaki öğeleri almak için kullanılır.
+
+create_table() metodu, 'tweets' adlı bir tablo oluşturur ve bu tabloya aşağıdaki alanları ekler:
+
+id: Birincil anahtar ve seri olarak artan tweet kimliği.
+
+device: Tweet'in gönderildiği cihazın adı.
+
+tweet_url: Tweet'in URL'si (benzersiz ve boş olamaz).
+
+user_url: Tweet'i gönderen kullanıcının profili.
+
+user_location: Kullanıcının coğrafi konumu.
+
+username: Tweet'i gönderen kullanıcının adı (boş olamaz).
+
+content: Tweet'in içeriği (boş olamaz).
+
+publish_date: Tweet'in yayınlanma tarihi.
+
+created_date: Veritabanına eklendiği tarih ve saat.
+
+hashtags: Tweet'teki hashtag'ler (boş olamaz).
+
+save() metodu, bir tweet'in bilgilerini alır ve 'tweets' tablosuna kaydeder. Bu yöntem, veritabanında zaten var olan bir tweet'i tekrar eklemeye 
+çalışırsa, bunu engeller ve uyarı mesajı gösterir.
+
+get_item() metodu, belirli bir tweet'in ID'sini alarak ilgili tweet bilgilerini döndürür. Eğer tweet bulunamazsa, 'None' değeri döner.
+
+get_all_items() metodu, 'tweets' tablosundaki tüm tweet'leri alır ve döndürür. Eğer tablo boşsa, 'None' değeri döner.
+
+Bu kod, Twitter API'sinden alınan verileri veritabanında depolamak ve sorgulamak için kullanışlı bir araç sunar.
+
+Ayrıca, model msticpy.data.data_obfus modülündeki hash_string() ve hash_account() fonksiyonlarını tweet verilerini anonimleştirmek için kullanır. Bu fonksiyonlar, tweet'leri izleyen kullanıcılara karşı KVKK gereği bir gizlilik önlemi olarak kullanılır.
 
 
 ## Technologies
