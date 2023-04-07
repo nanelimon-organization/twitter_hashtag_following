@@ -1,19 +1,9 @@
 # Twitter Hashtag Following Stream Job
 
+Bu repo, 
+  Twitterdan hashtag e bağlı verileri canlı olarak almak için yazılmış olan bir job script içermektedir. Aldığı tweetleri anlık olarak AWS RDB üzerinde bir postgresql e kayıt etmektedir. Anlık çekilen veriler (Social Content Analysis Application)["https://github.com/Teknofest-Nane-Limon/social-content-analysis-app"] için kullanılacaktır. Modülde bulunan **HASHTAG** değişkeni, kullanıcının toplamak istediği tweet'lerde bulunmasını istediği hashtag'i belirtir. 
 
-Bu Modül, bir veritabanı ile iletişim kuran ve Twitter'dan tweet'leri toplayan, kaydeden ve sorgulayan bir Tweets sınıfı içerir. 
-
-Modül, belirtilen Twitter hashtag'inden canlı tweet'leri toplamak ve verileri belirtilen bir modelde kaydetmek için kullanılır.
-
-Modülde bulunan HASHTAG değişkeni, kullanıcının toplamak istediği tweet'lerde bulunmasını istediği hashtag'i belirtir.
-
-Model döngü içinde çalışır ve her turda belirtilen hashtag'den canlı tweet'leri toplar ve model adlı bir Python sınıfı aracılığıyla verileri kaydeder. Bu işlem, döngü sürekli olarak çalışırken devam eder.
-
-
-Aws rds postgresql veritabanı ile iletişim kuran ve Twitter'dan tweet'leri toplayan, kaydeden ve sorgulayan bir Tweets sınıfı içerir. İşleyiş ve çalışma mantığı hakkında şu şekilde özetlenebilir:
-
-Tweets sınıfı, veritabanındaki 'tweets' adlı tabloyla çalışmak için statik yöntemler içerir. Bu yöntemler, tabloyu oluşturmak, verileri kaydetmek ve tablodaki öğeleri almak için kullanılır.
-
+## Tablo Yapısı
 
 <img src="https://github.com/Teknofest-Nane-Limon/twitter_hashtag_following/blob/main/asserts/Screenshot_2023-03-26_at_18.36.48.png" alt="alt text" width="400" height="300" ALIGN=RIGHT>
 
@@ -42,14 +32,7 @@ Kullanılan teknolojiler:
 - [PostgreSQL](https://www.postgresql.org/) - RDBMS database
 - [Python](https://docs.python.org/3.10/) - Python versiyon: 3.10 
 
-## Prerequisites
-
---- 
-
-
 ## Gereksinimler
-
-### Ortam
 
 Lütfen Python sürümünüzü `3.10` olarak ayarlayın:
 
