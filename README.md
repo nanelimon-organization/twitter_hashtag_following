@@ -1,7 +1,7 @@
 # Twitter Hashtag Following Stream Job
 
 Bu repo, 
-  Twitterdan hashtag e bağlı verileri canlı olarak almak için yazılmış olan bir job script içermektedir. Aldığı tweetleri anlık olarak AWS RDB üzerinde bir postgresql e kayıt etmektedir. Anlık çekilen veriler (Social Content Analysis Application)["https://github.com/Teknofest-Nane-Limon/social-content-analysis-app"] için kullanılacaktır. Modülde bulunan **HASHTAG** değişkeni, kullanıcının toplamak istediği tweet'lerde bulunmasını istediği hashtag'i belirtir. 
+  Twitterdan hashtag e bağlı verileri canlı olarak almak için yazılmış olan bir job script içermektedir. Aldığı tweetleri anlık olarak AWS RDB üzerinde bir postgresql e kayıt etmektedir. Anlık çekilen veriler [Social Content Analysis Application](https://github.com/Teknofest-Nane-Limon/social-content-analysis-app) için kullanılacaktır. Modülde bulunan **HASHTAG** değişkeni, kullanıcının toplamak istediği tweet'lerde bulunmasını istediği hashtag'i belirtir. 
 
 ## Tablo Yapısı
 
